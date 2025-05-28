@@ -1,17 +1,30 @@
-#pragma once
+﻿#pragma once
 
-#include <QtWidgets/QMainWindow>
-#include "ui_mainwindow.h"
+#include <QMainWindow>
+#include <QListWidget>
+#include <QPushButton>
+#include <QString>
 
-class mainwindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    mainwindow(QWidget *parent = nullptr);
-    ~mainwindow();
+    MainWindow(QWidget* parent = nullptr);
+
+private slots:
+    void browseSourceDirectory();
+    void browseTargetDirectory();
+    void copySelectedFiles();
 
 private:
-    Ui::mainwindowClass ui;
-};
+    QListWidget* fileListWidget;
+    QPushButton* btnSourceDir;
+    QPushButton* btnTargetDir;
+    QPushButton* btnCopyFiles;
 
+    QString sourceDir;
+    QString targetDir;
+
+    void loadFilesToList(const QString& dir);
+    QString generateUniqueFilename(const QString& path);
+};
